@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import Loader from "@/components/Loader";
+import ScrollProgress from "@/components/ScrollProgress";
 
 const serif = Playfair_Display({
   subsets: ["latin"],
@@ -49,7 +50,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${serif.variable} ${sans.variable}`}>
       <body>
+        <div className="grain" aria-hidden />
         <Loader />
+        <ScrollProgress />
         <Navbar />
         <main>{children}</main>
         <Footer />

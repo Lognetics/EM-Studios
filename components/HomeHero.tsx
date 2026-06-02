@@ -15,16 +15,16 @@ export default function HomeHero() {
   }, []);
 
   return (
-    <section className="relative flex h-[100svh] min-h-[640px] items-center justify-center overflow-hidden bg-ink">
+    <section className="relative flex h-[100svh] min-h-[640px] items-center justify-center overflow-hidden bg-onyx">
       {/* Cross-fading montage of slow-motion frames */}
       <AnimatePresence>
         <motion.div
           key={index}
           className="absolute inset-0"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.6, ease: "easeInOut" }}
+          transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
         >
           <Image
             src={HERO_IMAGES[index]}
@@ -32,19 +32,21 @@ export default function HomeHero() {
             fill
             priority
             sizes="100vw"
-            className="object-cover animate-slow-zoom"
+            className="animate-slow-zoom object-cover"
           />
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-ink/60 via-ink/30 to-ink/70" />
+      {/* layered darkening + glow */}
+      <div className="absolute inset-0 bg-gradient-to-b from-onyx/70 via-onyx/40 to-onyx/85" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,transparent_0%,rgba(8,8,8,0.55)_100%)]" />
 
       <div className="container-luxe relative z-10 text-center">
         <motion.span
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className="eyebrow"
+          className="inline-block text-xs uppercase tracking-wider2 text-gold"
         >
           Fashion · Portrait · Lifestyle · Brand · Events
         </motion.span>
@@ -53,18 +55,18 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-6 max-w-4xl font-serif text-4xl leading-[1.04] text-ivory sm:text-6xl lg:text-7xl"
+          className="mx-auto mt-7 max-w-4xl font-serif text-5xl leading-[1.02] text-ivory sm:text-6xl lg:text-8xl"
         >
           Timeless Moments.
           <br />
-          <span className="italic text-gold">Preserved Forever.</span>
+          <span className="italic text-gold-sheen">Preserved Forever.</span>
         </motion.h1>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ivory/80 md:text-lg"
+          className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ivory/75 md:text-lg"
         >
           At EM Studios, every image is crafted to preserve emotion, identity, and human
           connection—transforming fleeting moments into timeless visual narratives.
@@ -81,7 +83,7 @@ export default function HomeHero() {
           </Link>
           <Link
             href="/booking"
-            className="btn-outline border-ivory/50 text-ivory hover:border-ivory hover:bg-ivory hover:text-ink"
+            className="btn-outline border-ivory/40 text-ivory hover:border-gold hover:bg-gold hover:text-ink"
           >
             Book A Session
           </Link>

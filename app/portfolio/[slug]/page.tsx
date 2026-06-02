@@ -57,9 +57,9 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* Meta + Story */}
-      <section className="bg-ivory py-20 md:py-28">
+      <section className="bg-charcoal py-20 md:py-28">
         <div className="container-luxe grid gap-14 lg:grid-cols-12">
-          <Reveal className="lg:col-span-4">
+          <Reveal variant="right" className="lg:col-span-4">
             <dl className="space-y-8">
               {[
                 ["Client", project.client],
@@ -67,19 +67,19 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 ["Location", project.location],
                 ["Category", project.category],
               ].map(([k, v]) => (
-                <div key={k} className="border-t border-ink/10 pt-4">
+                <div key={k} className="border-t border-white/10 pt-4">
                   <dt className="eyebrow">{k}</dt>
-                  <dd className="mt-2 font-serif text-xl text-ink">{v}</dd>
+                  <dd className="mt-2 font-serif text-xl text-ivory">{v}</dd>
                 </div>
               ))}
             </dl>
           </Reveal>
-          <Reveal delay={0.1} className="lg:col-span-8">
+          <Reveal variant="left" delay={0.1} className="lg:col-span-8">
             <span className="eyebrow">The Story Behind The Shoot</span>
-            <p className="mt-6 font-serif text-2xl leading-relaxed text-ink md:text-3xl">
+            <p className="mt-6 font-serif text-2xl leading-relaxed text-ivory md:text-3xl">
               {project.story}
             </p>
-            <p className="mt-8 leading-relaxed text-warmgray">
+            <p className="mt-8 leading-relaxed text-ivory/55">
               Every project at EM Studios begins with intention. From the first discovery call
               through creative planning, the session itself, and the final art-directed delivery,
               this story was crafted to feel as timeless as the moment it preserves — a collaboration
@@ -90,14 +90,15 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
       </section>
 
       {/* Full gallery */}
-      <section className="bg-beige py-20 md:py-28">
+      <section className="bg-onyx py-20 md:py-28">
         <div className="container-luxe">
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
             {gallery.map((src, i) => (
               <Reveal
                 key={i}
+                variant="scale"
                 delay={(i % 2) * 0.1}
-                className={`relative overflow-hidden ${i === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/5]"}`}
+                className={`relative overflow-hidden rounded-sm ${i === 0 ? "md:col-span-2 aspect-[16/9]" : "aspect-[4/5]"}`}
               >
                 <Image
                   src={src}
@@ -114,13 +115,13 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="bg-ivory py-20 md:py-28">
+        <section className="bg-ink py-20 md:py-28">
           <div className="container-luxe">
-            <h2 className="font-serif text-3xl text-ink md:text-4xl">More In {project.category}</h2>
+            <h2 className="font-serif text-3xl text-ivory md:text-4xl">More In {project.category}</h2>
             <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-3">
               {related.map((p) => (
                 <Link key={p.slug} href={`/portfolio/${p.slug}`} className="group block">
-                  <div className="relative aspect-[4/5] overflow-hidden">
+                  <div className="relative aspect-[4/5] overflow-hidden rounded-sm">
                     <Image
                       src={p.img}
                       alt={p.title}
@@ -129,8 +130,8 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                       className="object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105"
                     />
                   </div>
-                  <h3 className="mt-4 font-serif text-xl text-ink">{p.title}</h3>
-                  <p className="mt-1 text-xs uppercase tracking-luxe text-warmgray">
+                  <h3 className="mt-4 font-serif text-xl text-ivory">{p.title}</h3>
+                  <p className="mt-1 text-xs uppercase tracking-luxe text-ivory/55">
                     {p.client} · {p.year}
                   </p>
                 </Link>

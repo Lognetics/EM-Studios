@@ -23,8 +23,8 @@ export default function JournalGrid() {
             onClick={() => setCat(c)}
             className={`whitespace-nowrap rounded-full border px-6 py-2.5 text-xs uppercase tracking-luxe transition-all duration-400 ease-cinematic ${
               cat === c
-                ? "border-ink bg-ink text-ivory"
-                : "border-ink/15 text-warmgray hover:border-ink/40 hover:text-ink"
+                ? "border-gold bg-gold text-ink"
+                : "border-white/15 text-ivory/60 hover:border-gold/50 hover:text-ivory"
             }`}
           >
             {c}
@@ -45,7 +45,7 @@ export default function JournalGrid() {
               className="group"
             >
               <Link href="/journal" className="block">
-                <div className="relative aspect-[4/3] overflow-hidden">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
                   <Image
                     src={a.img}
                     alt={a.title}
@@ -53,17 +53,18 @@ export default function JournalGrid() {
                     sizes="(max-width: 768px) 100vw, 33vw"
                     className="object-cover transition-transform duration-700 ease-cinematic group-hover:scale-105"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-onyx/60 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
                 </div>
-                <div className="mt-5 flex items-center gap-3 text-xs uppercase tracking-luxe text-warmgray">
+                <div className="mt-5 flex items-center gap-3 text-xs uppercase tracking-luxe text-ivory/50">
                   <span className="text-gold">{a.category}</span>
                   <span>·</span>
                   <span>{a.readTime}</span>
                 </div>
-                <h3 className="mt-3 font-serif text-2xl text-ink transition-colors group-hover:text-gold">
+                <h3 className="mt-3 font-serif text-2xl text-ivory transition-colors group-hover:text-gold">
                   {a.title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-warmgray">{a.excerpt}</p>
-                <span className="mt-4 inline-block text-xs uppercase tracking-luxe text-ink">
+                <p className="mt-3 text-sm leading-relaxed text-ivory/55">{a.excerpt}</p>
+                <span className="mt-4 inline-block text-xs uppercase tracking-luxe text-ivory/40">
                   {a.date}
                 </span>
               </Link>

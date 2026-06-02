@@ -18,7 +18,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Lock body scroll when the mobile menu is open.
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
     return () => {
@@ -26,7 +25,6 @@ export default function Navbar() {
     };
   }, [open]);
 
-  // Close the mobile menu on navigation.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
@@ -37,17 +35,12 @@ export default function Navbar() {
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-cinematic ${
         solid
-          ? "bg-ivory/90 backdrop-blur-md py-4 shadow-[0_1px_0_rgba(11,11,11,0.06)]"
+          ? "bg-ink/80 py-4 backdrop-blur-xl shadow-[0_1px_0_rgba(255,255,255,0.06)]"
           : "bg-transparent py-6"
       }`}
     >
       <nav className="container-luxe flex items-center justify-between">
-        <Link
-          href="/"
-          className={`font-serif text-xl tracking-wide transition-colors duration-500 ${
-            solid ? "text-ink" : "text-ivory"
-          }`}
-        >
+        <Link href="/" className="font-serif text-xl tracking-wide text-ivory">
           EM<span className="text-gold">.</span>Studios
         </Link>
 
@@ -58,7 +51,7 @@ export default function Navbar() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className={`link-underline ${solid ? "text-ink" : "text-ivory"} ${
+                  className={`link-underline text-ivory/80 hover:text-ivory ${
                     active ? "text-gold after:w-full" : ""
                   }`}
                 >
@@ -79,9 +72,7 @@ export default function Navbar() {
         <button
           aria-label="Toggle menu"
           onClick={() => setOpen((v) => !v)}
-          className={`lg:hidden flex h-10 w-10 flex-col items-center justify-center gap-1.5 ${
-            solid ? "text-ink" : "text-ivory"
-          }`}
+          className="flex h-10 w-10 flex-col items-center justify-center gap-1.5 text-ivory lg:hidden"
         >
           <span
             className={`h-px w-6 bg-current transition-all duration-300 ${
@@ -105,7 +96,7 @@ export default function Navbar() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
-            className="lg:hidden fixed inset-0 top-[64px] bg-ivory px-6 pt-8"
+            className="fixed inset-0 top-[64px] bg-ink px-6 pt-8 lg:hidden"
           >
             <ul className="flex flex-col gap-6">
               {NAV_LINKS.map((link, i) => (
@@ -117,7 +108,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="font-serif text-3xl text-ink hover:text-gold transition-colors"
+                    className="font-serif text-3xl text-ivory transition-colors hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -127,9 +118,7 @@ export default function Navbar() {
             <Link href="/booking" className="btn-gold mt-10 w-full">
               Book A Session
             </Link>
-            <div className="mt-10 text-xs uppercase tracking-luxe text-warmgray">
-              {SITE.email}
-            </div>
+            <div className="mt-10 text-xs uppercase tracking-luxe text-warmgray">{SITE.email}</div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -16,8 +16,9 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* Dark-dominant base */
   body {
-    @apply bg-ivory text-ink font-sans;
+    @apply bg-ink text-ivory font-sans;
     overflow-x: hidden;
   }
 
@@ -32,6 +33,21 @@
   h4 {
     @apply font-serif;
   }
+
+  /* Refined dark scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #080808;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #2a2a2a;
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-gold);
+  }
 }
 
 @layer components {
@@ -40,19 +56,34 @@
     @apply mx-auto w-full max-w-container px-6 md:px-10;
   }
 
-  /* All-caps spaced eyebrow label */
+  /* All-caps spaced eyebrow label with a gold lead-line */
   .eyebrow {
-    @apply text-xs uppercase tracking-luxe text-gold font-sans;
+    @apply inline-flex items-center gap-3 text-xs uppercase tracking-luxe text-gold font-sans;
+  }
+  .eyebrow::before {
+    content: "";
+    @apply h-px w-8 bg-gold/60;
+  }
+  .eyebrow-center::before {
+    display: none;
   }
 
-  /* Primary gold button */
+  /* Primary gold button with sheen on hover */
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-gold px-8 py-3.5
-      text-xs font-medium uppercase tracking-luxe text-ink transition-all duration-500
-      ease-cinematic hover:bg-bronze hover:text-ivory;
+    @apply relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full
+      bg-gold px-8 py-3.5 text-xs font-medium uppercase tracking-luxe text-ink
+      transition-all duration-500 ease-cinematic hover:shadow-glow;
+  }
+  .btn-gold::after {
+    content: "";
+    @apply absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent
+      transition-transform duration-700 ease-cinematic;
+  }
+  .btn-gold:hover::after {
+    @apply translate-x-full;
   }
 
-  /* Outlined button — adapts to dark/light via currentColor */
+  /* Outlined button — adapts via currentColor */
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 rounded-full border px-8 py-3.5
       text-xs font-medium uppercase tracking-luxe transition-all duration-500 ease-cinematic;
@@ -64,15 +95,60 @@
       after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-current
       after:transition-all after:duration-500 after:ease-cinematic hover:after:w-full;
   }
+
+  /* Shimmering gold gradient text */
+  .text-gold-sheen {
+    @apply bg-gold-sheen bg-clip-text text-transparent;
+    background-size: 200% auto;
+    @apply animate-shimmer;
+  }
+
+  /* Card surface for dark UI */
+  .card-dark {
+    @apply rounded-sm border border-white/5 bg-charcoal transition-all duration-500 ease-cinematic;
+  }
+  .card-dark:hover {
+    @apply border-gold/30 bg-graphite;
+  }
+
+  /* Thin divider line */
+  .rule {
+    @apply h-px w-full bg-white/10;
+  }
 }
 
-/* Hide scrollbar utility for horizontal carousels */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
+@layer utilities {
+  /* Hide scrollbar utility for horizontal carousels */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Subtle vertical mask-fade for marquees */
+  .mask-fade-x {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent,
+      black 12%,
+      black 88%,
+      transparent
+    );
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
 }
-.no-scrollbar {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+
+/* Film-grain texture overlay (pure CSS noise via SVG) */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
 }
 
 /* Masonry columns for portfolio */
@@ -93,4 +169,15 @@
 .masonry > * {
   break-inside: avoid;
   margin-bottom: 1.25rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

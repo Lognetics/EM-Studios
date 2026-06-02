@@ -268,6 +268,39 @@ export const SERVICES: Service[] = [
   },
 ];
 
+export const MARQUEE_WORDS = [
+  "Fashion",
+  "Portrait",
+  "Lifestyle",
+  "Editorial",
+  "Branding",
+  "Events",
+  "Creative Direction",
+  "Storytelling",
+];
+
+// Short statements of craft / approach — used to fill the Home "Approach" section.
+export const APPROACH = [
+  {
+    n: "01",
+    title: "Emotion First",
+    body:
+      "We don't chase the perfect pose — we wait for the true one. Every session is directed to draw out something honest, so the final image carries a feeling, not just a face.",
+  },
+  {
+    n: "02",
+    title: "Cinematic Craft",
+    body:
+      "Light, composition, and color are treated like the language of film. Each frame is built with intention — shadow and highlight composed to feel timeless rather than trend-bound.",
+  },
+  {
+    n: "03",
+    title: "A Considered Process",
+    body:
+      "From the first conversation to final delivery, the experience is calm, clear, and unhurried. You always know what comes next, and you always feel like the subject of a story worth telling.",
+  },
+];
+
 export const STATS = [
   { value: "500+", label: "Sessions Captured" },
   { value: "100+", label: "Brands Photographed" },

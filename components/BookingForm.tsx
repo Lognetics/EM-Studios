@@ -7,8 +7,8 @@ import { SERVICE_OPTIONS, BUDGET_OPTIONS } from "@/lib/content";
 type Status = "idle" | "submitting" | "success" | "error";
 
 const FIELD =
-  "w-full border-0 border-b border-ink/20 bg-transparent py-3 text-ink placeholder:text-warmgray/60 focus:border-gold focus:outline-none transition-colors";
-const LABEL = "block text-xs uppercase tracking-luxe text-warmgray mb-1";
+  "w-full border-0 border-b border-white/20 bg-transparent py-3 text-ivory placeholder:text-ivory/35 focus:border-gold focus:outline-none transition-colors [color-scheme:dark] [&>option]:bg-charcoal [&>option]:text-ivory";
+const LABEL = "block text-xs uppercase tracking-luxe text-ivory/55 mb-1";
 
 export default function BookingForm() {
   const [status, setStatus] = useState<Status>("idle");
@@ -54,13 +54,13 @@ export default function BookingForm() {
       <motion.div
         initial={{ opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center rounded-sm border border-gold/30 bg-beige/40 p-12 text-center"
+        className="flex flex-col items-center rounded-sm border border-gold/30 bg-charcoal p-12 text-center shadow-glow-sm"
       >
         <div className="flex h-14 w-14 items-center justify-center rounded-full border border-gold text-2xl text-gold">
           ✓
         </div>
-        <h3 className="mt-6 font-serif text-3xl text-ink">Your Story Begins.</h3>
-        <p className="mt-4 max-w-md text-warmgray">{serverMessage}</p>
+        <h3 className="mt-6 font-serif text-3xl text-ivory">Your Story Begins.</h3>
+        <p className="mt-4 max-w-md text-ivory/60">{serverMessage}</p>
         <button
           onClick={() => setStatus("idle")}
           className="link-underline mt-8 text-gold"

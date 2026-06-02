@@ -8,7 +8,7 @@ export default function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="divide-y divide-ink/10 border-y border-ink/10">
+    <div className="divide-y divide-white/10 border-y border-white/10">
       {FAQS.map((faq, i) => {
         const isOpen = open === i;
         return (
@@ -17,7 +17,7 @@ export default function FAQ() {
               onClick={() => setOpen(isOpen ? null : i)}
               className="flex w-full items-center justify-between gap-6 py-6 text-left"
             >
-              <span className="font-serif text-xl text-ink md:text-2xl">{faq.q}</span>
+              <span className="font-serif text-xl text-ivory md:text-2xl">{faq.q}</span>
               <span
                 className={`shrink-0 text-2xl text-gold transition-transform duration-400 ${
                   isOpen ? "rotate-45" : ""
@@ -35,7 +35,7 @@ export default function FAQ() {
                   transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
                   className="overflow-hidden"
                 >
-                  <p className="pb-6 leading-relaxed text-warmgray md:max-w-2xl">{faq.a}</p>
+                  <p className="pb-6 leading-relaxed text-ivory/60 md:max-w-2xl">{faq.a}</p>
                 </motion.div>
               )}
             </AnimatePresence>

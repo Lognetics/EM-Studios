@@ -27,8 +27,8 @@ export default function PortfolioGallery() {
             onClick={() => setFilter(cat)}
             className={`whitespace-nowrap rounded-full border px-6 py-2.5 text-xs uppercase tracking-luxe transition-all duration-400 ease-cinematic ${
               filter === cat
-                ? "border-ink bg-ink text-ivory"
-                : "border-ink/15 text-warmgray hover:border-ink/40 hover:text-ink"
+                ? "border-gold bg-gold text-ink"
+                : "border-white/15 text-ivory/60 hover:border-gold/50 hover:text-ivory"
             }`}
           >
             {cat}
@@ -47,7 +47,7 @@ export default function PortfolioGallery() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="group relative cursor-pointer overflow-hidden"
+              className="group relative cursor-pointer overflow-hidden rounded-sm"
             >
               <button
                 onClick={() => setLightbox(PROJECTS.indexOf(p))}
@@ -60,13 +60,13 @@ export default function PortfolioGallery() {
                     alt={p.title}
                     fill
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    className="object-cover transition-transform duration-[1.2s] ease-cinematic group-hover:scale-110"
+                    className="object-cover transition-transform duration-[1.4s] ease-cinematic group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-transparent to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-onyx via-onyx/10 to-transparent opacity-60 transition-opacity duration-500 group-hover:opacity-100" />
                   <figcaption className="absolute inset-x-0 bottom-0 translate-y-3 p-6 opacity-0 transition-all duration-500 ease-cinematic group-hover:translate-y-0 group-hover:opacity-100">
                     <span className="eyebrow">{p.category}</span>
                     <h3 className="mt-1 font-serif text-2xl text-ivory">{p.title}</h3>
-                    <p className="mt-1 text-xs uppercase tracking-luxe text-ivory/70">
+                    <p className="mt-1 text-xs uppercase tracking-luxe text-ivory/60">
                       {p.client} · {p.year}
                     </p>
                   </figcaption>
@@ -81,7 +81,7 @@ export default function PortfolioGallery() {
       <AnimatePresence>
         {lightbox !== null && (
           <motion.div
-            className="fixed inset-0 z-[90] flex items-center justify-center bg-ink/95 p-6"
+            className="fixed inset-0 z-[90] flex items-center justify-center bg-onyx/96 p-6 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -112,10 +112,8 @@ export default function PortfolioGallery() {
                 />
               </div>
               <div className="mt-6 flex flex-col items-center text-center">
-                <span className="eyebrow">{PROJECTS[lightbox].category}</span>
-                <h3 className="mt-2 font-serif text-3xl text-ivory">
-                  {PROJECTS[lightbox].title}
-                </h3>
+                <span className="eyebrow eyebrow-center">{PROJECTS[lightbox].category}</span>
+                <h3 className="mt-2 font-serif text-3xl text-ivory">{PROJECTS[lightbox].title}</h3>
                 <p className="mt-1 text-xs uppercase tracking-luxe text-ivory/60">
                   {PROJECTS[lightbox].client} · {PROJECTS[lightbox].location} ·{" "}
                   {PROJECTS[lightbox].year}

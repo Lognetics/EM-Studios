@@ -15,13 +15,14 @@ export default function PortfolioPage() {
       <PageHero
         eyebrow="Portfolio"
         title="Stories Through The Lens"
+        highlight={["Stories"]}
         subtitle="A curated collection of work — each frame a chapter, each project a complete story preserved in light."
         image="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=2000&q=80"
       />
-      <div className="bg-ivory">
+      <div className="bg-ink">
         <PortfolioGallery />
       </div>
-      <CTA title="Imagine Your Story, Told This Way." buttonLabel="Book A Session" />
+      <CTA title="Imagine Your Story, Told This Way." highlight={["Story,"]} buttonLabel="Book A Session" />
     </>
   );
 }
