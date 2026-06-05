@@ -9,7 +9,7 @@ import Testimonials from "@/components/Testimonials";
 import Marquee from "@/components/Marquee";
 import ParallaxImage from "@/components/ParallaxImage";
 import CTA from "@/components/CTA";
-import { APPROACH, ARTICLES, MARQUEE_WORDS, PROJECTS, SERVICES } from "@/lib/content";
+import { APPROACH, ARTICLES, MARQUEE_WORDS, PAGE_HERO, PROJECTS, SERVICES } from "@/lib/content";
 
 const FEATURED = PROJECTS.slice(0, 5);
 const LATEST = ARTICLES.slice(0, 3);
@@ -30,7 +30,7 @@ export default function HomePage() {
         <div className="container-luxe grid items-center gap-14 lg:grid-cols-2 lg:gap-20">
           <Reveal variant="right">
             <ParallaxImage
-              src="https://images.unsplash.com/photo-1452587925148-ce544e77e70d?auto=format&fit=crop&w=1200&q=80"
+              src={PAGE_HERO.aboutPreview}
               alt="EM Studios at work"
               amount={50}
               sizes="(max-width: 1024px) 100vw, 50vw"

@@ -4,6 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import BookingForm from "@/components/BookingForm";
 import FAQ from "@/components/FAQ";
+import { PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Booking",
@@ -19,7 +20,7 @@ export default function BookingPage() {
         title="Let's Create Something Timeless"
         highlight={["Timeless"]}
         subtitle="Share your vision with us. Every great image begins with a single conversation."
-        image="https://images.unsplash.com/photo-1554080353-a576cf803bda?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.booking}
       />
 
       {/* Form */}

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import BookingForm from "@/components/BookingForm";
-import { SITE } from "@/lib/content";
+import { SITE, PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -18,7 +18,7 @@ export default function ContactPage() {
         title="Start Your Story"
         highlight={["Story"]}
         subtitle="Whether you have a project in mind or simply want to say hello, we'd love to hear from you."
-        image="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.contact}
       />
 
       <section className="bg-charcoal py-20 md:py-28">

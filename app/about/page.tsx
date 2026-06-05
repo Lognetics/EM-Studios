@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import CTA from "@/components/CTA";
-import { VALUES } from "@/lib/content";
+import { VALUES, PAGE_HERO, FOUNDER_IMAGE } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "About",
@@ -29,7 +29,7 @@ export default function AboutPage() {
         eyebrow="About EM Studios"
         title="Where Creativity Meets Timeless Storytelling"
         highlight={["Timeless"]}
-        image="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.about}
       />
 
       {/* Founder Story — dark */}
@@ -47,7 +47,7 @@ export default function AboutPage() {
               />
               <Reveal variant="scale" delay={0.1}>
                 <ParallaxImage
-                  src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=1200&q=80"
+                  src={FOUNDER_IMAGE}
                   alt="Founder of EM Studios"
                   amount={40}
                   sizes="(max-width: 1024px) 100vw, 40vw"
@@ -84,7 +84,7 @@ export default function AboutPage() {
       {/* Philosophy — dark with image */}
       <section className="relative overflow-hidden bg-onyx py-28 md:py-40">
         <Image
-          src="https://images.unsplash.com/photo-1493863641943-9b68992a8d07?auto=format&fit=crop&w=2000&q=80"
+          src={PAGE_HERO.philosophy}
           alt=""
           fill
           sizes="100vw"

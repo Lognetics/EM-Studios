@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import JournalGrid from "@/components/JournalGrid";
 import CTA from "@/components/CTA";
+import { PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Journal",
@@ -17,7 +18,7 @@ export default function JournalPage() {
         title="Notes On Light & Story"
         highlight={["Story"]}
         subtitle="Essays on photography, fashion, branding, and the craft of preserving moments — from behind the lens at EM Studios."
-        image="https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.journal}
       />
       <div className="bg-ink">
         <JournalGrid />

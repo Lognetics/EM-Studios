@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import PageHero from "@/components/PageHero";
 import PortfolioGallery from "@/components/PortfolioGallery";
 import CTA from "@/components/CTA";
+import { PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Portfolio",
@@ -17,7 +18,7 @@ export default function PortfolioPage() {
         title="Stories Through The Lens"
         highlight={["Stories"]}
         subtitle="A curated collection of work — each frame a chapter, each project a complete story preserved in light."
-        image="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.portfolio}
       />
       <div className="bg-ink">
         <PortfolioGallery />

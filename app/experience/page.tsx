@@ -4,7 +4,7 @@ import SectionHeading from "@/components/SectionHeading";
 import Reveal from "@/components/Reveal";
 import TextReveal from "@/components/TextReveal";
 import CTA from "@/components/CTA";
-import { EXPERIENCE_STEPS } from "@/lib/content";
+import { EXPERIENCE_STEPS, PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "The Experience",
@@ -20,7 +20,7 @@ export default function ExperiencePage() {
         title="The EM Studios Experience"
         highlight={["Experience"]}
         subtitle="From the first conversation to the final frame, every step is intentional—designed to make the process feel as timeless as the imagery it creates."
-        image="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.experience}
       />
 
       <section className="bg-charcoal py-24 md:py-36">

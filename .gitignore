@@ -27,3 +27,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .vercel
+
+# original (unoptimized) photography — kept local only; optimized copies live in public/photos
+/public/images

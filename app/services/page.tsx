@@ -6,7 +6,7 @@ import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import BeforeAfter from "@/components/BeforeAfter";
 import CTA from "@/components/CTA";
-import { SERVICES } from "@/lib/content";
+import { SERVICES, PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Services",
@@ -22,7 +22,7 @@ export default function ServicesPage() {
         title="Photography Crafted With Purpose"
         highlight={["Purpose"]}
         subtitle="Every service is designed around a single idea: imagery that is timeless, meaningful, and deeply human."
-        image="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.services}
       />
 
       {/* Intro */}
@@ -95,10 +95,7 @@ export default function ServicesPage() {
             align="center"
           />
           <Reveal variant="scale" className="mx-auto mt-14 max-w-4xl">
-            <BeforeAfter
-              before="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80"
-              after="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1600&q=80&sat=-20"
-            />
+            <BeforeAfter before={PAGE_HERO.beforeAfter} after={PAGE_HERO.beforeAfter} />
           </Reveal>
         </div>
       </section>

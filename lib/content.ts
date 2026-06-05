@@ -1,6 +1,5 @@
 // Central content + data source for EM Studios.
-// Placeholder photography is sourced from Unsplash (curated, tasteful).
-// Swap `img` / `src` values for real EM Studios photography later.
+// Photography is the studio's own work, optimized into /public/photos/<category>/.
 
 export const SITE = {
   name: "EM Studios",
@@ -27,34 +26,63 @@ export const NAV_LINKS = [
   { label: "Contact", href: "/contact" },
 ];
 
-// Unsplash helper — tasteful, editorial photography placeholders.
-const u = (id: string, w = 1200) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=80`;
+// ---------------------------------------------------------------------------
+// Real photography library
+// ---------------------------------------------------------------------------
+const pad = (n: number) => String(n).padStart(2, "0");
+const series = (cat: string, count: number) =>
+  Array.from({ length: count }, (_, i) => `/photos/${cat}/${cat}-${pad(i + 1)}.jpg`);
 
-export const HERO_IMAGES = [
-  u("1469334031218-e382a71b716b", 2000),
-  u("1492707892479-7bc8d5a4ee93", 2000),
-  u("1483985988355-763728e1935b", 2000),
-];
+export const PHOTOS = {
+  fashion: series("fashion", 30),
+  portrait: series("portrait", 28),
+  events: series("events", 23),
+  weddings: series("weddings", 21),
+  founder: series("founder", 4),
+};
 
-export type Category =
-  | "Fashion"
-  | "Portrait"
-  | "Lifestyle"
-  | "Brands"
-  | "Editorial"
-  | "Events"
-  | "Creative Concepts";
+export const FOUNDER_IMAGE = PHOTOS.founder[0];
 
-export const PORTFOLIO_CATEGORIES: Category[] = [
-  "Fashion",
-  "Portrait",
-  "Lifestyle",
-  "Brands",
-  "Editorial",
-  "Events",
-  "Creative Concepts",
-];
+// Hero montage — a strong cross-section of the studio's range.
+export const HERO_IMAGES = [PHOTOS.fashion[2], PHOTOS.weddings[1], PHOTOS.portrait[3]];
+
+// ---------------------------------------------------------------------------
+// Portfolio
+// ---------------------------------------------------------------------------
+export type Category = "Fashion" | "Portrait" | "Events" | "Weddings";
+
+export const PORTFOLIO_CATEGORIES: Category[] = ["Fashion", "Portrait", "Events", "Weddings"];
+
+const catKey: Record<Category, keyof typeof PHOTOS> = {
+  Fashion: "fashion",
+  Portrait: "portrait",
+  Events: "events",
+  Weddings: "weddings",
+};
+
+export function photosForCategory(category: Category): string[] {
+  return PHOTOS[catKey[category]];
+}
+
+export type GalleryItem = { id: string; src: string; category: Category };
+
+// Full, interleaved gallery of every photograph — powers the Portfolio page.
+export const GALLERY: GalleryItem[] = (() => {
+  const buckets: [Category, string[]][] = [
+    ["Fashion", PHOTOS.fashion],
+    ["Portrait", PHOTOS.portrait],
+    ["Weddings", PHOTOS.weddings],
+    ["Events", PHOTOS.events],
+  ];
+  const max = Math.max(...buckets.map(([, a]) => a.length));
+  const out: GalleryItem[] = [];
+  for (let i = 0; i < max; i++) {
+    for (const [category, arr] of buckets) {
+      if (arr[i]) out.push({ id: `${category}-${i}`, src: arr[i], category });
+    }
+  }
+  return out;
+})();
 
 export type Project = {
   slug: string;
@@ -67,15 +95,16 @@ export type Project = {
   story: string;
 };
 
+// Curated featured projects (drive the Home grid + project story pages).
 export const PROJECTS: Project[] = [
   {
     slug: "noir-atelier",
     title: "Noir Atelier",
     client: "Maison Vesper",
     year: "2025",
-    location: "Paris, FR",
+    location: "Lagos, NG",
     category: "Fashion",
-    img: u("1483985988355-763728e1935b"),
+    img: PHOTOS.fashion[1],
     story:
       "An editorial campaign exploring the architecture of couture — light sculpted against shadow to reveal the silhouette as a story of its own.",
   },
@@ -84,124 +113,105 @@ export const PROJECTS: Project[] = [
     title: "Quiet Light",
     client: "Private Commission",
     year: "2025",
-    location: "New York, US",
+    location: "Studio",
     category: "Portrait",
-    img: u("1494790108377-be9c29b29330"),
+    img: PHOTOS.portrait[1],
     story:
       "A portrait series built on stillness — where a single unguarded glance carries the full weight of a person's character.",
-  },
-  {
-    slug: "golden-hours",
-    title: "Golden Hours",
-    client: "The Hartley Family",
-    year: "2024",
-    location: "Tuscany, IT",
-    category: "Lifestyle",
-    img: u("1519741497674-611481863552"),
-    story:
-      "A day documented honestly — laughter, slowness, and the ordinary intimacy that becomes extraordinary once it is preserved.",
-  },
-  {
-    slug: "forma-brand",
-    title: "Forma",
-    client: "Forma Skincare",
-    year: "2025",
-    location: "London, UK",
-    category: "Brands",
-    img: u("1556228720-195a672e8a03"),
-    story:
-      "A complete brand visual identity — product, texture, and human warmth unified into one consistent, trust-building language.",
-  },
-  {
-    slug: "the-editorial",
-    title: "Issue No.7",
-    client: "Lumen Magazine",
-    year: "2024",
-    location: "Milan, IT",
-    category: "Editorial",
-    img: u("1509631179647-0177331693ae"),
-    story:
-      "A twelve-page editorial story for print — concept, styling, and photography crafted as a single cinematic narrative.",
   },
   {
     slug: "vows",
     title: "Vows",
     client: "Amara & Elias",
     year: "2025",
-    location: "Santorini, GR",
-    category: "Events",
-    img: u("1519225421980-715cb0215aed"),
+    location: "Lagos, NG",
+    category: "Weddings",
+    img: PHOTOS.weddings[2],
     story:
       "A wedding remembered the way it felt — every glance, every tear, every quiet moment between the celebrations.",
   },
   {
-    slug: "chromatic",
-    title: "Chromatic",
-    client: "Self-Initiated",
-    year: "2024",
-    location: "Studio",
-    category: "Creative Concepts",
-    img: u("1513151233558-d860c5398176"),
+    slug: "the-gathering",
+    title: "The Gathering",
+    client: "Aurum Events",
+    year: "2025",
+    location: "Lagos, NG",
+    category: "Events",
+    img: PHOTOS.events[1],
     story:
-      "An experimental study of color as emotion — a personal exploration of how light and pigment shape feeling.",
+      "Documentary coverage of a landmark celebration — energy, motion, and the fleeting moments that make an occasion unforgettable.",
   },
   {
     slug: "tailored",
     title: "Tailored",
     client: "Bishop & Co.",
     year: "2025",
-    location: "New York, US",
+    location: "Studio",
     category: "Fashion",
-    img: u("1490578474895-699cd4e2cf59"),
+    img: PHOTOS.fashion[11],
     story:
-      "A menswear lookbook honoring craft — fabric, structure, and confidence captured with editorial precision.",
+      "A lookbook honoring craft — fabric, structure, and confidence captured with editorial precision.",
   },
   {
-    slug: "founder",
+    slug: "the-founder",
     title: "The Founder",
-    client: "Aria Technologies",
+    client: "Aria Group",
     year: "2024",
-    location: "San Francisco, US",
+    location: "Studio",
     category: "Portrait",
-    img: u("1500648767791-00dcc994a43e"),
+    img: PHOTOS.portrait[14],
     story:
       "Executive personal branding — authoritative yet human portraits designed to build immediate trust.",
   },
   {
-    slug: "morning-ritual",
-    title: "Morning Ritual",
-    client: "Còs Coffee",
-    year: "2025",
-    location: "Copenhagen, DK",
-    category: "Brands",
-    img: u("1495474472287-4d71bcdd2085"),
+    slug: "forever",
+    title: "Forever",
+    client: "Zara & David",
+    year: "2024",
+    location: "Lagos, NG",
+    category: "Weddings",
+    img: PHOTOS.weddings[15],
     story:
-      "Lifestyle brand imagery capturing the slow, sensory ritual of a morning — warmth, steam, and quiet intention.",
+      "The full arc of a wedding day — preparation, ceremony, and celebration — woven into one timeless visual narrative.",
   },
   {
-    slug: "runway",
-    title: "Runway",
-    client: "Atelier Noor",
-    year: "2024",
-    location: "Dubai, AE",
+    slug: "after-dark",
+    title: "After Dark",
+    client: "Lumen Nights",
+    year: "2025",
+    location: "Lagos, NG",
     category: "Events",
-    img: u("1469334031218-e382a71b716b"),
+    img: PHOTOS.events[13],
     story:
-      "Backstage and runway coverage of a couture show — energy, motion, and the artistry behind every garment.",
+      "An evening of light, music, and movement — captured to hold the atmosphere long after the night has ended.",
   },
   {
     slug: "soft-power",
     title: "Soft Power",
-    client: "Lumen Magazine",
+    client: "Editorial",
     year: "2025",
-    location: "Paris, FR",
-    category: "Editorial",
-    img: u("1492707892479-7bc8d5a4ee93"),
+    location: "Studio",
+    category: "Fashion",
+    img: PHOTOS.fashion[27],
     story:
       "A fashion editorial on strength and softness — testing how tenderness and authority can occupy the same frame.",
   },
+  {
+    slug: "true-self",
+    title: "True Self",
+    client: "Personal Branding",
+    year: "2024",
+    location: "Studio",
+    category: "Portrait",
+    img: PHOTOS.portrait[24],
+    story:
+      "Authentic portraiture for creatives and professionals — imagery that genuinely looks and feels like the person in front of the lens.",
+  },
 ];
 
+// ---------------------------------------------------------------------------
+// Services
+// ---------------------------------------------------------------------------
 export type Service = {
   slug: string;
   title: string;
@@ -219,7 +229,7 @@ export const SERVICES: Service[] = [
     description:
       "Editorial-grade fashion photography that elevates brands, designers, and creatives. From concept to final frame, every image is built to feel like a magazine spread — confident, cinematic, and unmistakably yours.",
     bullets: ["Editorial", "Campaigns", "Lookbooks", "Designer Collections"],
-    img: u("1483985988355-763728e1935b"),
+    img: PHOTOS.fashion[9],
   },
   {
     slug: "portrait",
@@ -228,7 +238,7 @@ export const SERVICES: Service[] = [
     description:
       "Authentic portraiture that reveals the person behind the pose — confidence, character, vulnerability, and presence. Perfect for those who want imagery that genuinely looks and feels like them.",
     bullets: ["Professionals", "Creatives", "Personal Branding", "Executives"],
-    img: u("1494790108377-be9c29b29330"),
+    img: PHOTOS.portrait[7],
   },
   {
     slug: "lifestyle",
@@ -237,7 +247,7 @@ export const SERVICES: Service[] = [
     description:
       "Honest, unforced lifestyle photography that preserves the texture of real life — the candid, the in-between, and the meaningful moments that deserve to be remembered exactly as they felt.",
     bullets: ["Daily life", "Personal stories", "Family moments"],
-    img: u("1519741497674-611481863552"),
+    img: PHOTOS.weddings[11],
   },
   {
     slug: "brand",
@@ -246,7 +256,7 @@ export const SERVICES: Service[] = [
     description:
       "Cohesive visual storytelling that helps businesses build trust, increase visibility, and create consistency across every touchpoint — imagery designed to make your brand impossible to forget.",
     bullets: ["Build trust", "Increase visibility", "Create consistency"],
-    img: u("1556228720-195a672e8a03"),
+    img: PHOTOS.fashion[17],
   },
   {
     slug: "event",
@@ -255,7 +265,7 @@ export const SERVICES: Service[] = [
     description:
       "Documentary-style event coverage that preserves moments worth remembering — corporate gatherings, private celebrations, and the once-in-a-lifetime occasions, captured with intention and discretion.",
     bullets: ["Corporate events", "Private celebrations", "Special occasions"],
-    img: u("1519225421980-715cb0215aed"),
+    img: PHOTOS.events[3],
   },
   {
     slug: "creative-direction",
@@ -264,22 +274,21 @@ export const SERVICES: Service[] = [
     description:
       "A premium, end-to-end service for clients who want a fully realized visual story. From the first idea to the final art-directed frame, we shape concept, mood, and styling into one cohesive narrative.",
     bullets: ["Concept Development", "Moodboards", "Styling Direction", "Story Design"],
-    img: u("1513151233558-d860c5398176"),
+    img: PHOTOS.fashion[24],
   },
 ];
 
 export const MARQUEE_WORDS = [
   "Fashion",
   "Portrait",
-  "Lifestyle",
+  "Weddings",
+  "Events",
   "Editorial",
   "Branding",
-  "Events",
-  "Creative Direction",
   "Storytelling",
+  "Creative Direction",
 ];
 
-// Short statements of craft / approach — used to fill the Home "Approach" section.
 export const APPROACH = [
   {
     n: "01",
@@ -319,13 +328,13 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "EM Studios didn't just photograph our brand — they understood it. Every frame felt like it already knew who we were. The result reshaped how our customers see us.",
     name: "Sofia Bennett",
-    role: "Founder, Forma Skincare",
+    role: "Founder, Forma",
   },
   {
     quote:
       "I have never felt so at ease in front of a camera. The portraits captured a version of me I didn't know existed — confident, calm, completely myself.",
     name: "Marcus Hale",
-    role: "CEO, Aria Technologies",
+    role: "CEO, Aria Group",
   },
   {
     quote:
@@ -335,9 +344,9 @@ export const TESTIMONIALS: Testimonial[] = [
   },
   {
     quote:
-      "Working with EM Studios elevated our entire campaign. The artistry, the professionalism, the attention to emotion — it's a different category entirely.",
+      "Working with EM Studios elevated our entire event. The artistry, the professionalism, the attention to emotion — it's a different category entirely.",
     name: "Lena Moretti",
-    role: "Creative Director, Lumen Magazine",
+    role: "Director, Aurum Events",
   },
 ];
 
@@ -360,7 +369,7 @@ export const ARTICLES: Article[] = [
       "In a world of infinite images, what makes a single photograph endure? A reflection on memory, meaning, and the quiet power of a frame.",
     date: "May 2026",
     readTime: "5 min",
-    img: u("1452587925148-ce544e77e70d"),
+    img: PHOTOS.portrait[11],
   },
   {
     slug: "art-of-visual-storytelling",
@@ -370,7 +379,7 @@ export const ARTICLES: Article[] = [
       "Great photography is never about the subject alone. It's about the story the subject is living — and how light chooses to tell it.",
     date: "April 2026",
     readTime: "7 min",
-    img: u("1500534314209-a25ddb2bd429"),
+    img: PHOTOS.fashion[4],
   },
   {
     slug: "personal-brand-through-photography",
@@ -380,7 +389,7 @@ export const ARTICLES: Article[] = [
       "Your image is your introduction. Here is how intentional photography becomes the foundation of a memorable personal brand.",
     date: "March 2026",
     readTime: "6 min",
-    img: u("1554080353-a576cf803bda"),
+    img: PHOTOS.portrait[19],
   },
   {
     slug: "behind-the-lens",
@@ -390,7 +399,7 @@ export const ARTICLES: Article[] = [
       "A look inside the studio — our process, our philosophy, and the craft of turning a fleeting moment into something timeless.",
     date: "February 2026",
     readTime: "8 min",
-    img: u("1542038784456-1ea8e935640e"),
+    img: PHOTOS.events[9],
   },
   {
     slug: "fashion-as-feeling",
@@ -400,7 +409,7 @@ export const ARTICLES: Article[] = [
       "Why the best fashion photography captures emotion before aesthetics — and how to direct a shoot that breathes.",
     date: "January 2026",
     readTime: "5 min",
-    img: u("1490481651871-ab68de25d43d"),
+    img: PHOTOS.fashion[21],
   },
   {
     slug: "finding-inspiration",
@@ -410,7 +419,7 @@ export const ARTICLES: Article[] = [
       "Inspiration is not a lightning strike. It's a practice. Notes on building a creative life that keeps the well full.",
     date: "December 2025",
     readTime: "6 min",
-    img: u("1502082553048-f009c37129b9"),
+    img: PHOTOS.weddings[17],
   },
 ];
 
@@ -436,37 +445,37 @@ export type ClientStory = {
 
 export const CLIENT_STORIES: ClientStory[] = [
   {
-    slug: "forma-skincare",
-    client: "Forma Skincare",
-    title: "Rebuilding A Brand's Visual Voice",
-    category: "Brand Story",
-    img: u("1556228720-195a672e8a03", 1600),
+    slug: "amara-elias",
+    client: "Amara & Elias",
+    title: "A Wedding Remembered The Way It Felt",
+    category: "Wedding Story",
+    img: PHOTOS.weddings[6],
     summary:
-      "When Forma was ready to grow beyond a startup, they needed imagery that matched their ambition. Over three sessions, we built a complete visual language — product, texture, and the human warmth behind the brand.",
+      "We documented their day the way it was lived — every glance, every tear, every quiet moment between the celebrations — so it could be relived for generations.",
+    testimonial:
+      "These images are a part of our family now. They hold the feeling, not just the moment.",
+  },
+  {
+    slug: "the-campaign",
+    client: "Maison Vesper",
+    title: "Rebuilding A Brand's Visual Voice",
+    category: "Fashion Story",
+    img: PHOTOS.fashion[13],
+    summary:
+      "When the house was ready to grow, they needed imagery that matched their ambition. Across three sessions we built a complete visual language — confident, editorial, and unmistakably theirs.",
     testimonial:
       "EM Studios understood us. Every frame felt like it already knew who we were.",
   },
   {
-    slug: "the-hartleys",
-    client: "The Hartley Family",
-    title: "A Day In Tuscany, Preserved",
-    category: "Lifestyle Story",
-    img: u("1519741497674-611481863552", 1600),
+    slug: "the-celebration",
+    client: "Aurum Events",
+    title: "An Evening Worth Remembering",
+    category: "Event Story",
+    img: PHOTOS.events[15],
     summary:
-      "No posing. No performance. Just a family on holiday — and a quiet documentation of the ordinary intimacy that becomes extraordinary once it lives forever in a photograph.",
+      "A landmark celebration documented end to end — the energy, the people, and the once-in-a-lifetime moments, captured with intention and discretion.",
     testimonial:
-      "Looking at the gallery felt like reliving the entire day — the real moments, not the staged ones.",
-  },
-  {
-    slug: "amara-elias",
-    client: "Amara & Elias",
-    title: "Vows In Santorini",
-    category: "Wedding Story",
-    img: u("1519225421980-715cb0215aed", 1600),
-    summary:
-      "A wedding above the Aegean. We documented it the way it felt — every glance, every tear, every quiet moment between the celebrations — so the day could be relived for generations.",
-    testimonial:
-      "These images are a part of our family now. They hold the feeling, not just the moment.",
+      "Looking back at the gallery, it felt like being right there again. Nothing staged — all real.",
   },
 ];
 
@@ -553,3 +562,19 @@ export const BUDGET_OPTIONS = [
   "$5,000 – $10,000",
   "$10,000+",
 ];
+
+// Page-hero background images (interior pages).
+export const PAGE_HERO = {
+  about: PHOTOS.fashion[0],
+  portfolio: PHOTOS.fashion[3],
+  services: PHOTOS.fashion[6],
+  experience: PHOTOS.events[5],
+  journal: PHOTOS.portrait[9],
+  clientStories: PHOTOS.weddings[3],
+  booking: PHOTOS.portrait[13],
+  contact: PHOTOS.events[11],
+  philosophy: PHOTOS.weddings[8],
+  aboutPreview: PHOTOS.portrait[5],
+  cta: PHOTOS.weddings[4],
+  beforeAfter: PHOTOS.fashion[15],
+};

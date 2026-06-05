@@ -4,7 +4,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import Reveal from "@/components/Reveal";
 import CTA from "@/components/CTA";
-import { PROJECTS } from "@/lib/content";
+import { PROJECTS, photosForCategory } from "@/lib/content";
 
 export function generateStaticParams() {
   return PROJECTS.map((p) => ({ slug: p.slug }));
@@ -23,10 +23,11 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
   const project = PROJECTS.find((p) => p.slug === params.slug);
   if (!project) notFound();
 
-  // A small gallery for the detail view — reuse other frames as supporting imagery.
-  const gallery = PROJECTS.filter((p) => p.slug !== project.slug)
-    .slice(0, 4)
-    .map((p) => p.img);
+  // Supporting frames for the detail view — drawn from the same category,
+  // excluding the hero image, capped at five.
+  const gallery = photosForCategory(project.category)
+    .filter((src) => src !== project.img)
+    .slice(0, 5);
 
   const related = PROJECTS.filter(
     (p) => p.category === project.category && p.slug !== project.slug

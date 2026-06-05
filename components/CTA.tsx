@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Reveal from "./Reveal";
 import TextReveal from "./TextReveal";
+import { PAGE_HERO } from "@/lib/content";
 
 type Props = {
   title?: string;
@@ -11,8 +12,7 @@ type Props = {
   highlight?: string[];
 };
 
-const CTA_IMAGE =
-  "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=2000&q=80";
+const CTA_IMAGE = PAGE_HERO.cta;
 
 /** Reusable cinematic call-to-action band used to close pages. */
 export default function CTA({

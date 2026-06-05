@@ -3,7 +3,7 @@ import PageHero from "@/components/PageHero";
 import Reveal from "@/components/Reveal";
 import ParallaxImage from "@/components/ParallaxImage";
 import CTA from "@/components/CTA";
-import { CLIENT_STORIES } from "@/lib/content";
+import { CLIENT_STORIES, PAGE_HERO } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: "Client Stories",
@@ -19,7 +19,7 @@ export default function ClientStoriesPage() {
         title="Stories Beyond The Photograph"
         highlight={["Beyond"]}
         subtitle="Behind every gallery is a person, a brand, a moment. These are their stories — told the way they were lived."
-        image="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=2000&q=80"
+        image={PAGE_HERO.clientStories}
       />
 
       <section>
