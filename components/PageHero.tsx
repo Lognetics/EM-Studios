@@ -31,7 +31,7 @@ export default function PageHero({ eyebrow, title, subtitle, image, highlight = 
       <div className="container-luxe relative z-10 pb-20 pt-40">
         <div className="max-w-3xl animate-fade-up">
           {eyebrow && <span className="eyebrow">{eyebrow}</span>}
-          <h1 className="mt-6 font-serif text-4xl leading-[1.04] text-ivory md:text-6xl lg:text-7xl">
+          <h1 className="mt-6 font-serif text-[2.35rem] leading-[1.1] text-ivory md:text-6xl md:leading-[1.04] lg:text-7xl">
             {words.map((w, i) => (
               <span key={i} className={hi.includes(w.replace(/[.,—]/g, "").toLowerCase()) ? "italic text-gold-sheen" : ""}>
                 {w}

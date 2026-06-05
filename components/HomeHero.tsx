@@ -46,7 +46,7 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2, duration: 1 }}
-          className="inline-block text-xs uppercase tracking-wider2 text-gold"
+          className="mx-auto block max-w-[18rem] text-[10px] uppercase leading-relaxed tracking-[0.2em] text-gold sm:max-w-none sm:text-xs sm:tracking-wider2"
         >
           Fashion · Portrait · Lifestyle · Brand · Events
         </motion.span>
@@ -55,7 +55,7 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.4, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-          className="mx-auto mt-7 max-w-4xl font-serif text-5xl leading-[1.02] text-ivory sm:text-6xl lg:text-8xl"
+          className="mx-auto mt-6 max-w-4xl font-serif text-[2.35rem] leading-[1.12] text-ivory sm:mt-7 sm:text-6xl sm:leading-[1.02] lg:text-8xl"
         >
           Timeless Moments.
           <br />
@@ -66,7 +66,7 @@ export default function HomeHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 1 }}
-          className="mx-auto mt-7 max-w-2xl text-base leading-relaxed text-ivory/75 md:text-lg"
+          className="mx-auto mt-6 max-w-2xl text-[15px] leading-relaxed text-ivory/75 sm:mt-7 sm:text-base md:text-lg"
         >
           At EM Studios, every image is crafted to preserve emotion, identity, and human
           connection—transforming fleeting moments into timeless visual narratives.
