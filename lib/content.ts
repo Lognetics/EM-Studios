@@ -43,8 +43,8 @@ export const PHOTOS = {
 
 export const FOUNDER_IMAGE = PHOTOS.founder[0];
 
-// Hero montage — a strong cross-section of the studio's range.
-export const HERO_IMAGES = [PHOTOS.fashion[2], PHOTOS.weddings[1], PHOTOS.portrait[3]];
+// Hero montage — founder leads, then a cross-section of the studio's range.
+export const HERO_IMAGES = [PHOTOS.founder[0], PHOTOS.weddings[1], PHOTOS.portrait[3]];
 
 // ---------------------------------------------------------------------------
 // Portfolio
@@ -565,8 +565,8 @@ export const BUDGET_OPTIONS = [
 
 // Page-hero background images (interior pages).
 export const PAGE_HERO = {
-  about: PHOTOS.fashion[0],
-  portfolio: PHOTOS.fashion[3],
+  about: PHOTOS.founder[2],
+  portfolio: PHOTOS.founder[1],
   services: PHOTOS.fashion[6],
   experience: PHOTOS.events[5],
   journal: PHOTOS.portrait[9],
@@ -574,7 +574,7 @@ export const PAGE_HERO = {
   booking: PHOTOS.portrait[13],
   contact: PHOTOS.events[11],
   philosophy: PHOTOS.weddings[8],
-  aboutPreview: PHOTOS.portrait[5],
+  aboutPreview: PHOTOS.founder[3],
   cta: PHOTOS.weddings[4],
   beforeAfter: PHOTOS.fashion[15],
 };
