@@ -4,7 +4,7 @@
 export const SITE = {
   name: "EM Studios",
   tagline: "Where Stories Are Preserved, Emotions Are Celebrated, and Time Becomes Timeless.",
-  email: "hello@emstudios.com",
+  email: "emstudios.ng@gmail.com",
   phone: "+234 906 707 9600",
   address: "12UF, Prime Resort, Abuja Nigeria",
   socials: [
