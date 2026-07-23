@@ -5,8 +5,8 @@ export const SITE = {
   name: "EM Studios",
   tagline: "Where Stories Are Preserved, Emotions Are Celebrated, and Time Becomes Timeless.",
   email: "hello@emstudios.com",
-  phone: "+1 (555) 014-2200",
-  address: "Studio 9, The Atelier, 14 Maison Lane, New York, NY",
+  phone: "+234 906 707 9600",
+  address: "12UF, Prime Resort, Abuja Nigeria",
   socials: [
     { label: "Instagram", href: "https://instagram.com" },
     { label: "Behance", href: "https://behance.net" },
